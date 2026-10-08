@@ -1,0 +1,30 @@
+import React, { useState } from 'react';
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ScatterChart, Scatter, ZAxis, Cell } from 'recharts';
+import { ArrowRight, ArrowUpDown, Search, Download, Inbox } from 'lucide-react';
+
+export const pct = value => `${(value*100).toFixed(1)}%`;
+export const num = value => new Intl.NumberFormat('en-IN').format(value);
+export const readable = value => value.replaceAll('_',' ');
+export const fmt = value => value == null ? '—' : value.toFixed(3);
+export const PALETTE=['#148b90','#3e657e','#e9aa50','#8da7b5','#516abd','#6d9984'];
+export function Empty({text='No results match these settings. Try adjusting the filters.'}) {return <div className="empty"><Inbox size={28}/><strong>No matching patterns</strong><p>{text}</p></div>}
+export function Panel({title,subtitle,children,action,className=''}) {return <section className={`panel ${className}`}><div className="panel-head"><div><h3>{title}</h3>{subtitle&&<p>{subtitle}</p>}</div>{action}</div>{children}</section>}
+export function Stat({label,value,detail,accent=false}) {return <div className={`stat ${accent?'accent':''}`}><span>{label}</span><strong>{num(value)}</strong><small>{detail}</small></div>}
+export function Field({label,children,hint}) {return <label className="field"><span>{label}</span>{children}{hint&&<small>{hint}</small>}</label>}
+export function NumberField({label,value,onChange,min=0,max=1,step=.01,hint}) {return <Field label={label} hint={hint}><input type="number" min={min} max={max} step={step} required value={value} onChange={e=>onChange(e.target.value===''?'':Number(e.target.value))}/></Field>}
+export function Bars({data,height=310,xLabel='',vertical=true}) {
+ if(!data.length) return <Empty/>;
+ return <div style={{height}} className="chart"><ResponsiveContainer width="100%" height="100%"><BarChart data={data} layout={vertical?'vertical':'horizontal'} margin={{left:0,right:24,top:12,bottom:12}}><CartesianGrid strokeDasharray="3 5" horizontal={!vertical} vertical={vertical}/>{vertical?<><XAxis type="number" tick={{fontSize:11}} allowDecimals={false}/><YAxis dataKey="name" type="category" width={150} tick={{fontSize:11}} tickFormatter={v=>v.length>25?v.slice(0,24)+'…':readable(v)}/></>:<><XAxis dataKey="name" tick={{fontSize:11}}/><YAxis tick={{fontSize:11}}/></>}<Tooltip contentStyle={{background:'#fff',color:'#183643',borderRadius:10}} formatter={v=>[v,xLabel||'Records']} labelFormatter={readable}/><Bar dataKey="value" radius={vertical?[0,5,5,0]:[5,5,0,0]} maxBarSize={25}>{data.map((_,i)=><Cell key={i} fill={PALETTE[i%PALETTE.length]}/>)}</Bar></BarChart></ResponsiveContainer></div>
+}
+export function ScatterPlot({rules,x='support',itemsets=false}) {
+ const values=rules.slice(0,1500);
+ if(!values.length) return <Empty/>;
+ return <div className="chart" style={{height:330}}><ResponsiveContainer width="100%" height="100%"><ScatterChart margin={{top:15,right:24,bottom:25,left:5}}><CartesianGrid strokeDasharray="3 5"/><XAxis type="number" dataKey={x} name={readable(x)} tick={{fontSize:11}} label={{value:readable(x),position:'bottom',offset:5}} tickFormatter={x==='support'?pct:undefined}/><YAxis type="number" dataKey={itemsets?'length':'confidence'} name={itemsets?'Length':'Confidence'} domain={itemsets?['auto','auto']:[0,1]} tick={{fontSize:11}} tickFormatter={itemsets?undefined:pct}/><ZAxis type="number" dataKey={itemsets?'item_count':'lift'} range={[30,160]}/><Tooltip content={({active,payload})=>{if(!active||!payload?.length)return null;const r=payload[0].payload;return <div className="plot-tip"><strong>{itemsets?r.itemset.map(readable).join(' + '):r.antecedents.map(readable).join(' + ')}</strong>{!itemsets&&<p>→ {r.consequents.map(readable).join(' + ')}</p>}<p>Support {pct(r.support)} · {r.item_count} records</p>{!itemsets&&<p>Confidence {pct(r.confidence)} · Lift {fmt(r.lift)}</p>}</div>}}/><Scatter data={values} fill="#168c91" fillOpacity={.65}/></ScatterChart></ResponsiveContainer></div>
+}
+export function RulePattern({rule}) {return <div className="rule-pattern"><div>{rule.antecedents.map(item=><span className="item" key={item}>{readable(item)}</span>)}</div><ArrowRight size={15}/><div>{rule.consequents.map(item=><span className={`item ${item.startsWith('Disease=')?'disease-item':''}`} key={item}>{readable(item)}</span>)}</div></div>}
+export function RuleTable({rules,sort='lift',descending=true,onSort}) {
+ const [advanced,setAdvanced]=useState(false);
+ if(!rules.length)return <Empty/>;
+ return <><div className="table-options"><label><input type="checkbox" checked={advanced} onChange={e=>setAdvanced(e.target.checked)}/> Show advanced metrics</label></div><div className="table-wrap"><table><thead><tr><th>Association pattern</th>{[['item_count','Count'],['support','Support'],['confidence','Confidence'],['lift','Lift'],['leverage','Leverage'],['conviction','Conviction']].filter(([key])=>advanced||!['leverage','conviction'].includes(key)).map(([key,label])=><th key={key}><button className="sort" onClick={()=>onSort?.(key)} title={`Sort by ${label}`}>{label} {onSort&&<ArrowUpDown size={12}/>} {sort===key?(descending?'↓':'↑'):''}</button></th>)}</tr></thead><tbody>{rules.map((rule,i)=><tr key={JSON.stringify([rule.antecedents,rule.consequents])}><td><RulePattern rule={rule}/></td><td>{rule.item_count}</td><td>{pct(rule.support)}</td><td>{pct(rule.confidence)}</td><td><span className="lift">{rule.lift.toFixed(2)}×</span></td><td hidden={!advanced}>{fmt(rule.leverage)}</td><td hidden={!advanced}>{rule.conviction_infinite?'∞':fmt(rule.conviction)}</td></tr>)}</tbody></table></div></>
+}
+export function MetricGuide(){return <div className="metric-guide"><div><b>Support</b><p>How often both sides occur together in the retained records.</p></div><div><b>Confidence</b><p>Of records with the left-hand pattern, how many also contain the right?</p></div><div><b>Lift</b><p>How common the right side is among matching records compared with all records. Above 1× means more common than the baseline.</p></div></div>}

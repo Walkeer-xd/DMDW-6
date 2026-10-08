@@ -1,0 +1,13 @@
+{
+  "dataset_title": "Disease Symptoms and Patient Profile Dataset",
+  "source_url": "https://www.kaggle.com/datasets/uom190346a/disease-symptoms-and-patient-profile-dataset",
+  "download_url": "https://www.kaggle.com/api/v1/datasets/download/uom190346a/disease-symptoms-and-patient-profile-dataset",
+  "owner": "uom190346a",
+  "version": 2,
+  "source_last_updated": "2024-01-21T17:06:21.017Z",
+  "acquired_date": "2026-10-02",
+  "license_as_listed_by_source": "MIT",
+  "filename": "Disease_symptom_and_patient_profile_dataset.csv",
+  "sha256": "79cd5314cfdefec9b86ee0efd63d3df64a619a2e2511c5908abde008edf1bfa8",
+  "provenance_note": "Downloaded directly from the source specified in the course PDF. Clinical origin and collection protocol not independently verified."
+}

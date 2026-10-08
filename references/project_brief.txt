@@ -1,0 +1,1091 @@
+You are the lead data scientist + full-stack engineer for my DMDW6 (Data Mining and Data Warehousing) academic project.
+
+I want you to build the ENTIRE project end-to-end, not just a small demonstration.
+
+PROJECT TITLE:
+"Association Rule Mining using Apriori on Disease Symptoms and Patient Profiles"
+
+PRIMARY OBJECTIVE:
+Take the FIRST dataset specified in the provided DMDW6 dataset reference:
+"Disease Symptoms and Patient Profile"
+
+Clean and preprocess the dataset, appropriately label/encode the data wherever required, transform it into a transaction/item representation suitable for Apriori association rule mining, execute Apriori, generate meaningful association rules, evaluate them using support, confidence and lift, and build a polished dashboard website where the final results can be explored and used directly in my academic project report/presentation.
+
+IMPORTANT:
+This is an academic data-mining project. The dashboard and report must describe associations only. Do NOT claim that an association proves medical causation or that the system is a medical diagnostic tool.
+
+==================================================
+PHASE 0 — FIRST UNDERSTAND THE PROJECT
+==================================================
+
+Before writing code:
+
+1. Inspect the entire repository.
+2. Identify the current project structure.
+3. Identify whether any dataset, notebook, CSV, Excel file, existing Python code, frontend, backend, README, package files, etc. already exist.
+4. Do NOT unnecessarily overwrite existing useful work.
+5. Reuse existing code where appropriate, but refactor it if necessary.
+6. Identify the technology stack already being used.
+7. If there is no suitable stack, use:
+   - Python
+   - pandas
+   - numpy
+   - mlxtend for Apriori/association rules
+   - scikit-learn only if actually useful
+   - FastAPI for backend/API
+   - React + Vite for frontend
+   - Tailwind CSS for styling
+   - Recharts or another lightweight charting library for visualizations
+
+If a simpler architecture is more appropriate for this repository, explain why and use it.
+
+==================================================
+PHASE 1 — DATASET IDENTIFICATION
+==================================================
+
+The project is based on the FIRST dataset in the provided DMDW6 reference:
+
+Disease Symptoms and Patient Profile.
+
+The reference describes this dataset as healthcare patient/disease records containing symptoms and patient-profile information.
+
+The intended Apriori preparation is:
+
+- Convert symptoms into items such as:
+  Fever=Yes
+  Cough=Yes
+  Headache=Yes
+- Discover frequent symptom combinations.
+- Generate rules such as:
+  symptom combination -> disease
+- Clean missing values.
+- Encode categorical/binary fields as items.
+- Keep disease as the consequent when performing disease-oriented rules.
+
+Do NOT silently substitute the Car Evaluation, Mushroom, Soybean, Automobile, Groceries, or COVID dataset unless the required first dataset is genuinely unavailable.
+
+If the dataset is not already present in the repository:
+1. Search for the official/public source.
+2. Prefer a reliable original dataset source.
+3. Download it programmatically if legally and technically possible.
+4. Record the dataset source in the README.
+5. Record the dataset version/date if available.
+6. Never fabricate rows or values.
+
+If internet access is unavailable, clearly document that the dataset must be placed in a specific location and create the rest of the pipeline so it works once the file is supplied.
+
+==================================================
+PHASE 2 — DATA AUDIT
+==================================================
+
+Create a proper data-audit pipeline before preprocessing.
+
+Generate a report containing:
+
+1. Dataset filename/source
+2. Number of rows
+3. Number of columns
+4. Column names
+5. Data types
+6. Missing values per column
+7. Duplicate rows
+8. Unique values per categorical column
+9. Numerical columns
+10. Categorical columns
+11. Binary columns
+12. Potential target/disease column
+13. Suspicious values
+14. Inconsistent spellings/capitalization
+15. Whitespace problems
+16. Unknown/missing markers such as:
+   ?, NA, N/A, null, empty strings, Unknown, etc.
+17. Class distribution of disease/target if present
+
+Save the audit results in machine-readable form so the dashboard can display them.
+
+==================================================
+PHASE 3 — DATA CLEANING
+==================================================
+
+Implement a reproducible cleaning pipeline.
+
+Do NOT blindly delete data.
+
+For each cleaning decision:
+
+1. Detect missing values.
+2. Determine whether the missing value means:
+   - genuinely unknown
+   - symptom absent
+   - invalid/malformed
+   - unavailable
+3. Only interpret missing as "No" when the dataset semantics justify that interpretation.
+4. Otherwise retain it as Unknown or use a documented handling strategy.
+5. Remove exact duplicate records where justified.
+6. Normalize column names.
+7. Strip unnecessary whitespace.
+8. Normalize categorical values.
+9. Normalize capitalization where appropriate.
+10. Standardize Yes/No/Binary values.
+11. Handle invalid values.
+12. Preserve the original raw dataset.
+13. Save the cleaned dataset separately.
+
+NEVER modify the raw dataset destructively.
+
+Create:
+
+data/raw/
+data/processed/
+data/intermediate/
+reports/
+src/
+
+or adapt the existing repository structure.
+
+Maintain a cleaning log such as:
+
+original_rows
+duplicate_rows_removed
+missing_values_before
+missing_values_after
+invalid_values_fixed
+columns_removed
+columns_transformed
+
+==================================================
+PHASE 4 — LABELING / ENCODING
+==================================================
+
+This part is VERY IMPORTANT.
+
+The dataset must be converted into an item-based representation suitable for Apriori.
+
+For each categorical/binary attribute, convert values into meaningful item labels.
+
+Examples:
+
+Fever = Yes
+Cough = Yes
+Headache = Yes
+Gender = Male
+Age_Group = 18-30
+
+should become items such as:
+
+Fever=Yes
+Cough=Yes
+Headache=Yes
+Gender=Male
+Age_Group=18-30
+
+Do not use meaningless labels such as:
+
+1
+0
+2
+3
+
+unless there is a documented mapping.
+
+For numerical fields:
+
+1. Inspect the distribution.
+2. Decide whether they need binning.
+3. Use meaningful bins when numerical values are relevant.
+4. Document the bin boundaries.
+
+For example:
+
+Age:
+18-30
+31-45
+46-60
+60+
+
+Only use bins appropriate to the actual dataset.
+
+If a numerical field is not useful for the association analysis, do not arbitrarily include it.
+
+For every transformed feature, maintain a metadata dictionary:
+
+original_column
+transformed_column
+original_value
+new_item_label
+reason
+
+Save this metadata.
+
+==================================================
+PHASE 5 — TARGET / DISEASE HANDLING
+==================================================
+
+Identify the disease/diagnosis/class column automatically.
+
+If there is a clearly identifiable disease column, use it as the target/consequent.
+
+Rules should primarily have the form:
+
+SYMPTOM/PROFILE ITEMS -> DISEASE
+
+For example:
+
+{Fever=Yes, Cough=Yes} -> {Disease=Flu}
+
+Do NOT allow disease labels to appear in the antecedent when generating the primary disease-oriented rules.
+
+Create two rule datasets:
+
+1. ALL ASSOCIATION RULES
+2. DISEASE-ORIENTED RULES
+
+Disease-oriented rules should preferably have:
+
+antecedent = symptoms/profile
+consequent = disease
+
+This distinction must be visible in the dashboard.
+
+==================================================
+PHASE 6 — TRANSACTION GENERATION
+==================================================
+
+Convert each patient/entity record into one transaction.
+
+Example:
+
+Patient row:
+
+Fever = Yes
+Cough = Yes
+Headache = No
+Age = 25
+Gender = Male
+Disease = Flu
+
+could become:
+
+[
+    "Fever=Yes",
+    "Cough=Yes",
+    "Age_Group=18-30",
+    "Gender=Male",
+    "Disease=Flu"
+]
+
+However, for disease-oriented Apriori:
+
+INPUT ANTECEDENT ITEMS:
+Fever=Yes
+Cough=Yes
+Age_Group=18-30
+Gender=Male
+
+CONSEQUENT:
+Disease=Flu
+
+Make sure the transaction representation is correct and reproducible.
+
+Save:
+
+transactions.json
+
+and/or
+
+transactions.csv
+
+and an encoded transaction matrix if useful.
+
+==================================================
+PHASE 7 — APRIORI
+==================================================
+
+Implement Apriori properly.
+
+Use mlxtend.frequent_patterns.apriori unless the repository already has a correct Apriori implementation that should be retained.
+
+The pipeline should support configurable:
+
+min_support
+min_confidence
+min_lift
+max_itemset_size
+max_rules
+
+Do not hard-code arbitrary values without explanation.
+
+Start with sensible defaults and make them configurable from the dashboard.
+
+Generate:
+
+1. Frequent itemsets
+2. Association rules
+3. Disease-oriented rules
+
+For each frequent itemset calculate/store:
+
+itemset
+support
+item_count
+length
+
+For each rule calculate/store:
+
+antecedents
+consequents
+support
+confidence
+lift
+leverage
+conviction
+
+If mlxtend provides additional useful metrics, retain them.
+
+==================================================
+PHASE 8 — RULE FILTERING
+==================================================
+
+Create meaningful filters.
+
+Rules should be ranked by:
+
+1. Lift
+2. Confidence
+3. Support
+
+But do not rank solely by confidence because very common diseases can create misleadingly high-confidence rules.
+
+Implement filters:
+
+minimum support
+minimum confidence
+minimum lift
+maximum antecedent length
+specific disease
+specific symptom
+top N rules
+
+Allow the user to modify these interactively.
+
+Important interpretation:
+
+Support:
+How frequently the antecedent and consequent occur together in the dataset.
+
+Confidence:
+How often the consequent occurs when the antecedent occurs.
+
+Lift:
+How much more frequently the antecedent and consequent occur together compared with what would be expected if they were independent.
+
+Lift > 1 indicates positive association.
+
+The dashboard should explain these metrics in simple language.
+
+==================================================
+PHASE 9 — QUALITY CONTROL
+==================================================
+
+Before building the frontend, verify the results.
+
+Write automated tests for:
+
+1. Dataset loading
+2. Cleaning
+3. Missing-value handling
+4. Label encoding
+5. Transaction creation
+6. Apriori execution
+7. Rule generation
+8. Rule filtering
+9. Disease-oriented rule validation
+10. API responses
+
+Perform sanity checks:
+
+- No empty transactions
+- No malformed item labels
+- No disease rule without a disease consequent
+- No NaN metric values
+- Support between 0 and 1
+- Confidence between 0 and 1
+- Lift >= 0
+- No duplicate rules
+- Antecedent and consequent are disjoint
+- Results are reproducible
+
+==================================================
+PHASE 10 — BACKEND API
+==================================================
+
+Build a clean backend API.
+
+Suggested endpoints:
+
+GET /api/health
+
+GET /api/dataset/summary
+
+GET /api/dataset/columns
+
+GET /api/dataset/missing-values
+
+GET /api/dataset/distribution
+
+GET /api/apriori/itemsets
+
+GET /api/apriori/rules
+
+GET /api/apriori/rules/disease
+
+GET /api/apriori/top-rules
+
+GET /api/apriori/metrics
+
+POST /api/apriori/run
+
+POST /api/apriori/filter
+
+GET /api/export/rules
+
+GET /api/export/itemsets
+
+The API should allow the frontend to specify:
+
+min_support
+min_confidence
+min_lift
+max_itemset_size
+disease
+symptom
+top_n
+
+Validate all API inputs.
+
+Return useful error messages.
+
+==================================================
+PHASE 11 — DASHBOARD WEBSITE
+==================================================
+
+Create a polished academic dashboard.
+
+It should look like a real Data Mining project, not a basic HTML page.
+
+Suggested dashboard title:
+
+"Apriori Association Rule Mining Dashboard"
+
+Subtitle:
+
+"Disease Symptoms & Patient Profile Analysis"
+
+Use a clean modern UI.
+
+==================================================
+DASHBOARD PAGE 1 — OVERVIEW
+==================================================
+
+Show KPI cards:
+
+- Total Records
+- Total Attributes
+- Disease Classes
+- Missing Values
+- Duplicate Records
+- Frequent Itemsets
+- Association Rules
+- Strong Rules
+
+Show:
+
+Dataset overview
+Preprocessing status
+Apriori configuration
+Last analysis timestamp
+
+Include a project methodology flow:
+
+Raw Data
+↓
+Data Cleaning
+↓
+Labeling / Encoding
+↓
+Transaction Generation
+↓
+Apriori
+↓
+Frequent Itemsets
+↓
+Association Rules
+↓
+Filtering
+↓
+Insights
+
+==================================================
+DASHBOARD PAGE 2 — DATA QUALITY
+==================================================
+
+Display:
+
+1. Missing-value chart
+2. Duplicate count
+3. Column data types
+4. Unique-value counts
+5. Disease/class distribution
+6. Before vs after cleaning statistics
+
+Provide a table:
+
+Column | Type | Missing | Unique Values | Treatment
+
+Add a "Cleaning Decisions" section explaining what was done.
+
+==================================================
+DASHBOARD PAGE 3 — DATA EXPLORATION
+==================================================
+
+Include charts for:
+
+- Disease distribution
+- Most common symptoms
+- Symptom frequency
+- Patient profile distributions
+- Categorical distributions
+
+Use appropriate chart types.
+
+Allow filtering.
+
+==================================================
+DASHBOARD PAGE 4 — FREQUENT ITEMSETS
+==================================================
+
+Create a table:
+
+Itemset
+Length
+Support
+Count
+
+Add filters:
+
+Minimum support
+Maximum itemset size
+Item search
+
+Add visualizations:
+
+- Support vs itemset size
+- Top frequent itemsets
+- Item frequency
+
+==================================================
+DASHBOARD PAGE 5 — ASSOCIATION RULES
+==================================================
+
+This is the most important page.
+
+Create a powerful rules table:
+
+Antecedent
+Consequent
+Support
+Confidence
+Lift
+Leverage
+Conviction
+
+Example formatting:
+
+Fever=Yes + Cough=Yes
+        ↓
+Disease=Flu
+
+Make the rules easy to understand.
+
+Add:
+
+- Search
+- Disease filter
+- Symptom filter
+- Minimum support
+- Minimum confidence
+- Minimum lift
+- Top N
+
+Allow sorting by every metric.
+
+==================================================
+DASHBOARD PAGE 6 — DISEASE-ORIENTED ANALYSIS
+==================================================
+
+Create a dedicated page for:
+
+"Symptom/Profile → Disease Associations"
+
+For every disease, show:
+
+- Number of rules
+- Strongest rule
+- Highest confidence rule
+- Highest lift rule
+- Most common associated symptoms
+
+Allow selecting a disease.
+
+When a disease is selected, show:
+
+Disease:
+[Selected Disease]
+
+Top associated patterns:
+
+1. Symptom A + Symptom B -> Disease
+2. Symptom A + Symptom C -> Disease
+3. Symptom B + Age Group -> Disease
+
+Clearly state:
+
+"These are statistical associations in the dataset and should not be interpreted as medical causation or clinical diagnosis."
+
+==================================================
+DASHBOARD PAGE 7 — RULE VISUALIZATION
+==================================================
+
+Create visualizations such as:
+
+1. Support vs Confidence scatter plot
+2. Lift vs Confidence scatter plot
+3. Top rules by lift
+4. Top rules by confidence
+5. Rule network graph if practical
+
+For the scatter plot:
+
+X = Support
+Y = Confidence
+Bubble/size or color = Lift
+
+Provide hover tooltips.
+
+==================================================
+DASHBOARD PAGE 8 — APRIORI PARAMETERS
+==================================================
+
+Create an interactive control panel:
+
+Minimum Support
+Minimum Confidence
+Minimum Lift
+Maximum Itemset Size
+Top N Rules
+
+Button:
+
+"Run Apriori"
+
+Show loading state.
+
+Show:
+
+"Analysis completed successfully"
+
+with updated statistics.
+
+Do not reload the entire page unnecessarily.
+
+==================================================
+DASHBOARD PAGE 9 — REPORT / EXPORT
+==================================================
+
+Create a report-ready page.
+
+It should summarize:
+
+1. Dataset
+2. Dataset dimensions
+3. Data cleaning
+4. Encoding
+5. Transaction representation
+6. Apriori parameters
+7. Frequent itemsets
+8. Association rules
+9. Top rules
+10. Disease-oriented findings
+11. Interpretation
+12. Limitations
+
+Provide buttons:
+
+Download Rules CSV
+Download Frequent Itemsets CSV
+Download Cleaned Dataset CSV
+Download Analysis JSON
+Download Report
+
+If generating a PDF report is practical, implement it.
+
+The report should contain tables and charts suitable for inserting into a college project report.
+
+==================================================
+PHASE 12 — REPORT CONTENT
+==================================================
+
+Create a REPORT.md containing a complete academic report.
+
+Structure:
+
+1. Title
+2. Abstract
+3. Introduction
+4. Problem Statement
+5. Objectives
+6. Dataset Description
+7. Data Preprocessing
+8. Data Cleaning
+9. Data Labeling and Encoding
+10. Transaction Representation
+11. Apriori Algorithm
+12. Association Rule Mining
+13. Evaluation Metrics
+14. Experimental Setup
+15. Results
+16. Important Association Rules
+17. Disease-Oriented Analysis
+18. Dashboard
+19. Discussion
+20. Limitations
+21. Conclusion
+22. Future Scope
+23. References
+
+Explain:
+
+Support
+Confidence
+Lift
+
+using the actual project data wherever possible.
+
+DO NOT invent results.
+
+All numerical results in the report must be generated from the actual execution of the pipeline.
+
+==================================================
+PHASE 13 — IMPORTANT ACADEMIC INTERPRETATION
+==================================================
+
+The uploaded DMDW6 reference explicitly emphasizes:
+
+- inspect columns, missing values and categorical/numerical fields
+- convert categorical values into items
+- bin numerical fields when required
+- create one transaction per row/entity unless it is already a basket dataset
+- run Apriori with minimum support
+- generate rules and filter using confidence and lift
+- present meaningful rules in the report
+- association does not imply causation
+
+Follow this methodology.
+
+For healthcare results, NEVER write:
+
+"Fever causes Disease X"
+
+Instead write:
+
+"Fever=Yes is positively associated with Disease X in this dataset."
+
+Also include a limitation:
+
+"The discovered rules represent statistical associations in the dataset and should not be interpreted as medical causation, diagnosis, or clinical recommendations."
+
+==================================================
+PHASE 14 — VISUAL DESIGN
+==================================================
+
+Make the website professional.
+
+Requirements:
+
+- Responsive
+- Desktop + tablet + mobile
+- Sidebar navigation
+- Top header
+- Cards
+- Tables
+- Charts
+- Tooltips
+- Search
+- Filters
+- Loading states
+- Empty states
+- Error states
+- Toast notifications
+- Dark/light mode if practical
+- Consistent typography
+- Professional academic color scheme
+- Good spacing
+- No excessive animations
+
+Do NOT make it look like a generic template.
+
+It should look like a polished Data Mining / Analytics project.
+
+==================================================
+PHASE 15 — PROJECT STRUCTURE
+==================================================
+
+Use a clean structure similar to:
+
+project/
+│
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── intermediate/
+│
+├── backend/
+│   ├── app/
+│   │   ├── main.py
+│   │   ├── api/
+│   │   ├── services/
+│   │   ├── models/
+│   │   └── utils/
+│   └── requirements.txt
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── charts/
+│   │   ├── services/
+│   │   └── App.*
+│   └── package.json
+│
+├── notebooks/
+│
+├── scripts/
+│
+├── tests/
+│
+├── reports/
+│
+├── README.md
+├── REPORT.md
+└── .gitignore
+
+Adapt this to the existing repository if necessary.
+
+==================================================
+PHASE 16 — REPRODUCIBILITY
+==================================================
+
+The entire analysis must be reproducible with commands such as:
+
+python scripts/preprocess.py
+
+python scripts/run_apriori.py
+
+and then:
+
+cd backend
+uvicorn app.main:app --reload
+
+cd frontend
+npm install
+npm run dev
+
+Document every command in README.md.
+
+Provide environment setup instructions.
+
+Create requirements.txt/package.json appropriately.
+
+==================================================
+PHASE 17 — DATA PIPELINE AUTOMATION
+==================================================
+
+Create one command that can execute the complete analysis:
+
+python scripts/run_pipeline.py
+
+It should:
+
+1. Load raw dataset
+2. Audit data
+3. Clean data
+4. Encode data
+5. Create transactions
+6. Run Apriori
+7. Generate rules
+8. Filter disease-oriented rules
+9. Generate summary statistics
+10. Save all outputs
+
+Running this command twice on the same dataset should produce consistent results.
+
+==================================================
+PHASE 18 — RESULT FILES
+==================================================
+
+Generate at minimum:
+
+data/processed/cleaned_dataset.csv
+
+data/intermediate/transactions.csv
+
+results/frequent_itemsets.csv
+
+results/association_rules.csv
+
+results/disease_rules.csv
+
+results/summary.json
+
+results/data_quality.json
+
+results/preprocessing_metadata.json
+
+results/analysis_config.json
+
+==================================================
+PHASE 19 — README
+==================================================
+
+Create an excellent README.
+
+Include:
+
+Project overview
+Features
+Dataset
+Architecture
+Pipeline
+Preprocessing
+Apriori methodology
+Metrics
+Screenshots/placeholders
+Installation
+Running the project
+API documentation
+Dashboard
+Exporting results
+Project structure
+Limitations
+Future improvements
+
+==================================================
+PHASE 20 — TESTING
+==================================================
+
+Run all tests.
+
+Fix:
+
+- syntax errors
+- import errors
+- type errors
+- API errors
+- frontend build errors
+- broken routes
+- chart rendering errors
+- empty data bugs
+- malformed rule output
+- encoding bugs
+
+Then run:
+
+backend tests
+frontend build
+pipeline
+Apriori analysis
+
+Do not stop after writing the code.
+
+Actually execute the pipeline and verify that the generated results make sense.
+
+==================================================
+PHASE 21 — FINAL VERIFICATION
+==================================================
+
+Before considering the project complete, verify:
+
+[ ] Raw dataset preserved
+[ ] Dataset cleaned
+[ ] Missing values handled
+[ ] Duplicate records handled
+[ ] Labels are meaningful
+[ ] Categorical values encoded
+[ ] Numerical values appropriately binned where necessary
+[ ] Transactions generated correctly
+[ ] Apriori runs successfully
+[ ] Frequent itemsets generated
+[ ] Association rules generated
+[ ] Disease-oriented rules generated
+[ ] Support calculated
+[ ] Confidence calculated
+[ ] Lift calculated
+[ ] Rules can be filtered
+[ ] Dashboard displays actual results
+[ ] Charts work
+[ ] Export works
+[ ] Backend works
+[ ] Frontend builds
+[ ] Tests pass
+[ ] README completed
+[ ] REPORT.md completed
+[ ] No fabricated results
+[ ] Healthcare interpretation avoids causal claims
+
+==================================================
+VERY IMPORTANT CODING RULES
+==================================================
+
+1. DO NOT fabricate dataset values.
+2. DO NOT fabricate Apriori results.
+3. DO NOT fabricate metrics.
+4. DO NOT silently replace the first dataset with another dataset.
+5. Do not delete the raw dataset.
+6. Keep preprocessing reproducible.
+7. Explain every important preprocessing decision.
+8. Use actual computed results in the report.
+9. Make the dashboard consume actual generated result files/API responses.
+10. Avoid hard-coded charts containing fake data.
+11. Avoid hard-coded association rules.
+12. Do not treat correlation/association as causation.
+13. Keep the project suitable for a university DMDW/Data Mining submission.
+14. Write clean, modular, maintainable code.
+15. Add comments where the data-mining logic is non-obvious.
+
+==================================================
+FINAL DELIVERABLE
+==================================================
+
+At the end, give me a concise final summary containing:
+
+1. What you built
+2. Dataset used
+3. Number of records
+4. Number of attributes
+5. Number of frequent itemsets
+6. Number of association rules
+7. Number of disease-oriented rules
+8. Apriori parameters used
+9. Top 10 strongest meaningful rules
+10. Files created
+11. How to run the project
+12. Frontend URL
+13. Backend URL
+14. Tests performed
+15. Any limitations or manual steps still required
+
+Most importantly:
+
+DO NOT merely tell me what code I should write.
+
+Actually inspect the repository, implement the complete project, run it, fix errors, generate the results, and leave the repository in a working state.

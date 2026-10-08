@@ -1,0 +1,1162 @@
+{
+  "cleaning_log": {
+    "original_rows": 349,
+    "cleaned_rows": 300,
+    "duplicate_rows_removed": 49,
+    "missing_values_before": 0,
+    "missing_values_after": 0,
+    "invalid_values_fixed": 0,
+    "invalid_value_details": [],
+    "columns_removed": [],
+    "columns_excluded_from_mining": [
+      "Outcome_Variable",
+      "Age"
+    ],
+    "columns_transformed": {
+      "Disease": "Disease",
+      "Fever": "Fever",
+      "Cough": "Cough",
+      "Fatigue": "Fatigue",
+      "Difficulty Breathing": "Difficulty_Breathing",
+      "Age": "Age",
+      "Gender": "Gender",
+      "Blood Pressure": "Blood_Pressure",
+      "Cholesterol Level": "Cholesterol_Level",
+      "Outcome Variable": "Outcome_Variable"
+    },
+    "decisions": [
+      "Preserve the source CSV byte-for-byte; audit before transformation.",
+      "Remove exact duplicate rows by default for a unique-profile analysis. Without patient IDs their identity cannot be established; --keep-duplicates provides a sensitivity analysis.",
+      "Trim whitespace and normalize field names. Standardize categorical case without guessing disease synonyms or expanding truncated labels.",
+      "Unknown, missing and invalid observations remain Unknown. They are omitted from transactions, never converted into symptom absence.",
+      "Keep explicit Yes and No symptom items: recorded absence is different from missingness.",
+      "Bin integer ages into 0-17, 18-30, 31-45, 46-60 and 61+. These are descriptive groups, not clinical risk categories.",
+      "Exclude Outcome_Variable from all mining because its semantics are insufficiently documented and it could mix downstream outcomes into profile associations.",
+      "Keep Disease in transactions; primary disease rules have exactly one Disease consequent and no Disease antecedent.",
+      "Retain truncated disease names and possible aliases separately; flag them for source review instead of inventing corrections."
+    ],
+    "duplicate_policy": "remove exact duplicates"
+  },
+  "feature_mapping": [
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Acne",
+      "new_item_label": "Disease=Acne",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Allergic Rhinitis",
+      "new_item_label": "Disease=Allergic Rhinitis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Alzheimer's Disease",
+      "new_item_label": "Disease=Alzheimer's Disease",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Anemia",
+      "new_item_label": "Disease=Anemia",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Anxiety Disorders",
+      "new_item_label": "Disease=Anxiety Disorders",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Appendicitis",
+      "new_item_label": "Disease=Appendicitis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Asthma",
+      "new_item_label": "Disease=Asthma",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Atherosclerosis",
+      "new_item_label": "Disease=Atherosclerosis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Autism Spectrum Disorder (ASD)",
+      "new_item_label": "Disease=Autism Spectrum Disorder (ASD)",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Bipolar Disorder",
+      "new_item_label": "Disease=Bipolar Disorder",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Bladder Cancer",
+      "new_item_label": "Disease=Bladder Cancer",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Brain Tumor",
+      "new_item_label": "Disease=Brain Tumor",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Breast Cancer",
+      "new_item_label": "Disease=Breast Cancer",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Bronchitis",
+      "new_item_label": "Disease=Bronchitis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Cataracts",
+      "new_item_label": "Disease=Cataracts",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Cerebral Palsy",
+      "new_item_label": "Disease=Cerebral Palsy",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Chickenpox",
+      "new_item_label": "Disease=Chickenpox",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Cholecystitis",
+      "new_item_label": "Disease=Cholecystitis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Cholera",
+      "new_item_label": "Disease=Cholera",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Chronic Kidney Disease",
+      "new_item_label": "Disease=Chronic Kidney Disease",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Chronic Obstructive Pulmonary Disease (COPD)",
+      "new_item_label": "Disease=Chronic Obstructive Pulmonary Disease (COPD)",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Chronic Obstructive Pulmonary...",
+      "new_item_label": "Disease=Chronic Obstructive Pulmonary...",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Cirrhosis",
+      "new_item_label": "Disease=Cirrhosis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Colorectal Cancer",
+      "new_item_label": "Disease=Colorectal Cancer",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Common Cold",
+      "new_item_label": "Disease=Common Cold",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Conjunctivitis (Pink Eye)",
+      "new_item_label": "Disease=Conjunctivitis (Pink Eye)",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Coronary Artery Disease",
+      "new_item_label": "Disease=Coronary Artery Disease",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Crohn's Disease",
+      "new_item_label": "Disease=Crohn's Disease",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Cystic Fibrosis",
+      "new_item_label": "Disease=Cystic Fibrosis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Dementia",
+      "new_item_label": "Disease=Dementia",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Dengue Fever",
+      "new_item_label": "Disease=Dengue Fever",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Depression",
+      "new_item_label": "Disease=Depression",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Diabetes",
+      "new_item_label": "Disease=Diabetes",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Diverticulitis",
+      "new_item_label": "Disease=Diverticulitis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Down Syndrome",
+      "new_item_label": "Disease=Down Syndrome",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Eating Disorders (Anorexia,...",
+      "new_item_label": "Disease=Eating Disorders (Anorexia,...",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Ebola Virus",
+      "new_item_label": "Disease=Ebola Virus",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Eczema",
+      "new_item_label": "Disease=Eczema",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Endometriosis",
+      "new_item_label": "Disease=Endometriosis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Epilepsy",
+      "new_item_label": "Disease=Epilepsy",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Esophageal Cancer",
+      "new_item_label": "Disease=Esophageal Cancer",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Fibromyalgia",
+      "new_item_label": "Disease=Fibromyalgia",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Gastroenteritis",
+      "new_item_label": "Disease=Gastroenteritis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Glaucoma",
+      "new_item_label": "Disease=Glaucoma",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Gout",
+      "new_item_label": "Disease=Gout",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "HIV/AIDS",
+      "new_item_label": "Disease=HIV/AIDS",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Hemophilia",
+      "new_item_label": "Disease=Hemophilia",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Hemorrhoids",
+      "new_item_label": "Disease=Hemorrhoids",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Hepatitis",
+      "new_item_label": "Disease=Hepatitis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Hepatitis B",
+      "new_item_label": "Disease=Hepatitis B",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Hyperglycemia",
+      "new_item_label": "Disease=Hyperglycemia",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Hypertension",
+      "new_item_label": "Disease=Hypertension",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Hypertensive Heart Disease",
+      "new_item_label": "Disease=Hypertensive Heart Disease",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Hyperthyroidism",
+      "new_item_label": "Disease=Hyperthyroidism",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Hypoglycemia",
+      "new_item_label": "Disease=Hypoglycemia",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Hypothyroidism",
+      "new_item_label": "Disease=Hypothyroidism",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Influenza",
+      "new_item_label": "Disease=Influenza",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Kidney Cancer",
+      "new_item_label": "Disease=Kidney Cancer",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Kidney Disease",
+      "new_item_label": "Disease=Kidney Disease",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Klinefelter Syndrome",
+      "new_item_label": "Disease=Klinefelter Syndrome",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Liver Cancer",
+      "new_item_label": "Disease=Liver Cancer",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Liver Disease",
+      "new_item_label": "Disease=Liver Disease",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Lung Cancer",
+      "new_item_label": "Disease=Lung Cancer",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Lyme Disease",
+      "new_item_label": "Disease=Lyme Disease",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Lymphoma",
+      "new_item_label": "Disease=Lymphoma",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Malaria",
+      "new_item_label": "Disease=Malaria",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Marfan Syndrome",
+      "new_item_label": "Disease=Marfan Syndrome",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Measles",
+      "new_item_label": "Disease=Measles",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Melanoma",
+      "new_item_label": "Disease=Melanoma",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Migraine",
+      "new_item_label": "Disease=Migraine",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Multiple Sclerosis",
+      "new_item_label": "Disease=Multiple Sclerosis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Mumps",
+      "new_item_label": "Disease=Mumps",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Muscular Dystrophy",
+      "new_item_label": "Disease=Muscular Dystrophy",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Myocardial Infarction (Heart...",
+      "new_item_label": "Disease=Myocardial Infarction (Heart...",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Obsessive-Compulsive Disorde...",
+      "new_item_label": "Disease=Obsessive-Compulsive Disorde...",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Osteoarthritis",
+      "new_item_label": "Disease=Osteoarthritis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Osteomyelitis",
+      "new_item_label": "Disease=Osteomyelitis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Osteoporosis",
+      "new_item_label": "Disease=Osteoporosis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Otitis Media (Ear Infection)",
+      "new_item_label": "Disease=Otitis Media (Ear Infection)",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Ovarian Cancer",
+      "new_item_label": "Disease=Ovarian Cancer",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Pancreatic Cancer",
+      "new_item_label": "Disease=Pancreatic Cancer",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Pancreatitis",
+      "new_item_label": "Disease=Pancreatitis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Parkinson's Disease",
+      "new_item_label": "Disease=Parkinson's Disease",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Pneumocystis Pneumonia (PCP)",
+      "new_item_label": "Disease=Pneumocystis Pneumonia (PCP)",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Pneumonia",
+      "new_item_label": "Disease=Pneumonia",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Pneumothorax",
+      "new_item_label": "Disease=Pneumothorax",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Polio",
+      "new_item_label": "Disease=Polio",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Polycystic Ovary Syndrome (PCOS)",
+      "new_item_label": "Disease=Polycystic Ovary Syndrome (PCOS)",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Prader-Willi Syndrome",
+      "new_item_label": "Disease=Prader-Willi Syndrome",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Prostate Cancer",
+      "new_item_label": "Disease=Prostate Cancer",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Psoriasis",
+      "new_item_label": "Disease=Psoriasis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Rabies",
+      "new_item_label": "Disease=Rabies",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Rheumatoid Arthritis",
+      "new_item_label": "Disease=Rheumatoid Arthritis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Rubella",
+      "new_item_label": "Disease=Rubella",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Schizophrenia",
+      "new_item_label": "Disease=Schizophrenia",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Scoliosis",
+      "new_item_label": "Disease=Scoliosis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Sepsis",
+      "new_item_label": "Disease=Sepsis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Sickle Cell Anemia",
+      "new_item_label": "Disease=Sickle Cell Anemia",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Sinusitis",
+      "new_item_label": "Disease=Sinusitis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Sleep Apnea",
+      "new_item_label": "Disease=Sleep Apnea",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Spina Bifida",
+      "new_item_label": "Disease=Spina Bifida",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Stroke",
+      "new_item_label": "Disease=Stroke",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Systemic Lupus Erythematosus...",
+      "new_item_label": "Disease=Systemic Lupus Erythematosus...",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Testicular Cancer",
+      "new_item_label": "Disease=Testicular Cancer",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Tetanus",
+      "new_item_label": "Disease=Tetanus",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Thyroid Cancer",
+      "new_item_label": "Disease=Thyroid Cancer",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Tonsillitis",
+      "new_item_label": "Disease=Tonsillitis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Tourette Syndrome",
+      "new_item_label": "Disease=Tourette Syndrome",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Tuberculosis",
+      "new_item_label": "Disease=Tuberculosis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Turner Syndrome",
+      "new_item_label": "Disease=Turner Syndrome",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Typhoid Fever",
+      "new_item_label": "Disease=Typhoid Fever",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Ulcerative Colitis",
+      "new_item_label": "Disease=Ulcerative Colitis",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Urinary Tract Infection",
+      "new_item_label": "Disease=Urinary Tract Infection",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Urinary Tract Infection (UTI)",
+      "new_item_label": "Disease=Urinary Tract Infection (UTI)",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Williams Syndrome",
+      "new_item_label": "Disease=Williams Syndrome",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Disease",
+      "transformed_column": "Disease",
+      "original_value": "Zika Virus",
+      "new_item_label": "Disease=Zika Virus",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Fever",
+      "transformed_column": "Fever",
+      "original_value": "No",
+      "new_item_label": "Fever=No",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Fever",
+      "transformed_column": "Fever",
+      "original_value": "Yes",
+      "new_item_label": "Fever=Yes",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Cough",
+      "transformed_column": "Cough",
+      "original_value": "No",
+      "new_item_label": "Cough=No",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Cough",
+      "transformed_column": "Cough",
+      "original_value": "Yes",
+      "new_item_label": "Cough=Yes",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Fatigue",
+      "transformed_column": "Fatigue",
+      "original_value": "No",
+      "new_item_label": "Fatigue=No",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Fatigue",
+      "transformed_column": "Fatigue",
+      "original_value": "Yes",
+      "new_item_label": "Fatigue=Yes",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Difficulty Breathing",
+      "transformed_column": "Difficulty_Breathing",
+      "original_value": "No",
+      "new_item_label": "Difficulty_Breathing=No",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Difficulty Breathing",
+      "transformed_column": "Difficulty_Breathing",
+      "original_value": "Yes",
+      "new_item_label": "Difficulty_Breathing=Yes",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "19",
+      "new_item_label": "Age_Group=18-30",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "25",
+      "new_item_label": "Age_Group=18-30",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "28",
+      "new_item_label": "Age_Group=18-30",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "29",
+      "new_item_label": "Age_Group=18-30",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "30",
+      "new_item_label": "Age_Group=18-30",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "31",
+      "new_item_label": "Age_Group=31-45",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "32",
+      "new_item_label": "Age_Group=31-45",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "35",
+      "new_item_label": "Age_Group=31-45",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "38",
+      "new_item_label": "Age_Group=31-45",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "39",
+      "new_item_label": "Age_Group=31-45",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "40",
+      "new_item_label": "Age_Group=31-45",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "42",
+      "new_item_label": "Age_Group=31-45",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "43",
+      "new_item_label": "Age_Group=31-45",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "45",
+      "new_item_label": "Age_Group=31-45",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "48",
+      "new_item_label": "Age_Group=46-60",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "50",
+      "new_item_label": "Age_Group=46-60",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "52",
+      "new_item_label": "Age_Group=46-60",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "55",
+      "new_item_label": "Age_Group=46-60",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "56",
+      "new_item_label": "Age_Group=46-60",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "57",
+      "new_item_label": "Age_Group=46-60",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "60",
+      "new_item_label": "Age_Group=46-60",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "65",
+      "new_item_label": "Age_Group=61+",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "70",
+      "new_item_label": "Age_Group=61+",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "80",
+      "new_item_label": "Age_Group=61+",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "85",
+      "new_item_label": "Age_Group=61+",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Age",
+      "transformed_column": "Age_Group",
+      "original_value": "90",
+      "new_item_label": "Age_Group=61+",
+      "reason": "Inclusive bins: 0-17, 18-30, 31-45, 46-60, 61-120; unknown omitted"
+    },
+    {
+      "original_column": "Gender",
+      "transformed_column": "Gender",
+      "original_value": "Female",
+      "new_item_label": "Gender=Female",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Gender",
+      "transformed_column": "Gender",
+      "original_value": "Male",
+      "new_item_label": "Gender=Male",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Blood Pressure",
+      "transformed_column": "Blood_Pressure",
+      "original_value": "High",
+      "new_item_label": "Blood_Pressure=High",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Blood Pressure",
+      "transformed_column": "Blood_Pressure",
+      "original_value": "Low",
+      "new_item_label": "Blood_Pressure=Low",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Blood Pressure",
+      "transformed_column": "Blood_Pressure",
+      "original_value": "Normal",
+      "new_item_label": "Blood_Pressure=Normal",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Cholesterol Level",
+      "transformed_column": "Cholesterol_Level",
+      "original_value": "High",
+      "new_item_label": "Cholesterol_Level=High",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Cholesterol Level",
+      "transformed_column": "Cholesterol_Level",
+      "original_value": "Low",
+      "new_item_label": "Cholesterol_Level=Low",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Cholesterol Level",
+      "transformed_column": "Cholesterol_Level",
+      "original_value": "Normal",
+      "new_item_label": "Cholesterol_Level=Normal",
+      "reason": "Readable categorical item; explicit Yes and No retained"
+    },
+    {
+      "original_column": "Outcome Variable",
+      "transformed_column": "Outcome_Variable",
+      "original_value": "Negative",
+      "new_item_label": null,
+      "reason": "Excluded outcome or unknown value"
+    },
+    {
+      "original_column": "Outcome Variable",
+      "transformed_column": "Outcome_Variable",
+      "original_value": "Positive",
+      "new_item_label": null,
+      "reason": "Excluded outcome or unknown value"
+    }
+  ]
+}
