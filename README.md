@@ -202,7 +202,7 @@ Useful paths:
 
 Run `python -m pytest -q` for the complete Python suite. The existing source-identity test expects CRLF bytes while this checkout contains LF bytes; that pre-existing checksum failure is documented in the validation notes. The source file has intentionally been left unchanged.
 
-See the [technical guide](docs/TECHNICAL_GUIDE.md), [presentation guide](docs/PRESENTATION_GUIDE.md), and [current validation record](reports/DATASET_AND_VISUAL_VALIDATION.md).
+See the [technical architecture and viva handbook](docs/TECHNICAL_GUIDE.md) for diagrams, preprocessing and Apriori internals, worked metrics, API/frontend flows, design tradeoffs, and technical Q&A. The [presentation guide](docs/PRESENTATION_GUIDE.md) covers the live walkthrough; the [current validation record](reports/DATASET_AND_VISUAL_VALIDATION.md) records completed checks.
 
 ### Vercel
 
