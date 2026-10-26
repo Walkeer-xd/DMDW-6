@@ -1,0 +1,5 @@
+# Preserve the downloaded source hash on every platform.
+datasets/symptoms/data/raw/dataset.csv -text
+
+# PDF byte offsets must not be changed by text normalization.
+*.pdf binary

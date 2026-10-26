@@ -51,6 +51,7 @@ class RuleFilter(BaseModel):
     disease: str = Field('', max_length=150)
     symptom: str = Field('', max_length=100)
     search: str = Field('', max_length=200)
+    item: str = Field('', max_length=200)
     top_n: int = Field(100, ge=1, le=100000)
     sort_by: str = Field('lift', pattern='^(lift|confidence|support|leverage|conviction|antecedent_support|consequent_support|item_count)$')
     descending: bool = True
@@ -233,6 +234,7 @@ def filter_rules(rules, f):
                and (not f.disease_only or is_disease_rule(r))
                and (not f.disease or f'Disease={f.disease}' in r['consequents'])
                and (not f.symptom or any(x.split('=')[0] == f.symptom for x in r['antecedents']))
+               and (not f.item or f.item in r['antecedents'] or f.item in r['consequents'])
                and f.search.casefold() in ' '.join(r['antecedents']+r['consequents']).casefold()]
     def score(r):
         return math.inf if f.sort_by == 'conviction' and r['conviction_infinite'] else (r.get(f.sort_by) or 0)

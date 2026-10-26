@@ -6,7 +6,7 @@
   "outputDirectory": "frontend/dist",
   "functions": {
     "api/index.py": {
-      "includeFiles": "{backend/**,src/**,data/**,results/**,reports/**,REPORT.md}",
+      "includeFiles": "{backend/**,src/**,datasets/**,data/**,results/**,reports/**,REPORT.md}",
       "maxDuration": 60
     }
   },

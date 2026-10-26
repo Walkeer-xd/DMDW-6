@@ -215,3 +215,35 @@ See `reports/VALIDATION.md` for the completed test record and browser/PDF checks
 Small data and 116 imbalanced labels limit coverage. Disease label truncation and aliases are unresolved. Identical profiles may represent legitimate different patients, so deduplication is a documented analytical choice. Binning, minimum support and maximum itemset size change discoveries. Closely related rules are redundant, and high lift can rest on only six observations. There is no multiple-testing correction, independent holdout validation or clinical provenance verification. The application has no authentication and is bound to localhost for academic use.
 
 Future work: source verification, authoritative label harmonization, duplicate/binning sensitivity analysis, bootstrap stability, held-out replication, redundant-rule pruning and scale comparisons with FP-growth. The local UI uses a web font when available and falls back to system fonts offline; datasets and analytics need no external service once installed.
+
+
+## Independent dataset selection
+
+`src/datasets.py` registers the two sources. The default `profiles` source retains every original file location. The `symptoms` source lives entirely under `datasets/symptoms/`, including its immutable raw CSV, provenance, intermediate files, results, PDF, and Markdown report. `src/symptom_pipeline.py` adapts symptom slots into recorded-presence items without creating demographics or negative observations.
+
+`GET /api/datasets` returns the source catalog, readiness, per-source defaults, and whether rerunning is supported. All analysis, distribution, filtering, itemset, metric, rerun, and export endpoints also exist under `/api/datasets/{dataset_id}/`. For example:
+
+- `/api/datasets/profiles/analysis` and `/api/datasets/symptoms/analysis`
+- `/api/datasets/symptoms/apriori/rules/disease?disease=Dengue`
+- `POST /api/datasets/symptoms/apriori/run`
+- `/api/datasets/symptoms/export/pdf`
+- `/api/datasets/symptoms/export/rules?disease_only=true&disease=Malaria`
+
+The original `/api/analysis`, `/api/apriori/*`, `/api/dataset/*`, and `/api/export/*` routes remain compatible with the original source by default. Dataset IDs are allowlisted before path construction. Snapshots are cached independently; a rerun stages its selected source's files and replaces only that workspace. A shared writer lock protects report rendering as well as publication. Failed staged runs retain the previous complete cached snapshot.
+
+The UI changes selection only after the catalog and requested snapshot load successfully. It resets source-specific filters and tutorial progress, keeps the current section, and locks controls during loading/rerunning. A failed switch retains the previous source and can be retried. All download links use the selected source namespace, including filtered CSV and tutorial PDF links.
+
+Symptom defaults are support 0.01, confidence 0.30, lift 1.20, itemset size 3, max rules 5,000 per family, and exact-duplicate removal. Omitted API run fields use the selected source's defaults. This larger vocabulary is capped at three-item combinations to bound enumeration. The general-rule export cap also keeps the full dashboard API response below the hosted response-size limit; the complete 1,166-rule disease family is retained. Its saved JSON attachment uses compact serialization so that download also fits the prepared hosted payload budget. The uncapped general-rule count is recorded in the summary and report.
+
+Use `python scripts/run_pipeline.py --dataset symptoms` to regenerate that source. The default CLI command continues to target profiles. Vercel packaging includes `datasets/**`; both prepared sources are readable there, while running an analysis remains local-only. See `tests/test_datasets.py` for schema, semantic, metric, API, export, default-setting, failure, and write-isolation checks.
+
+
+## Visual exploration and selectable filters
+
+The main views show compact evidence cards, a source-coverage ring, a source-to-cleaned-profile flow, and charts. Methodology, glossary entries, exact chart tables, and long report summaries remain available behind expandable controls. Panel information icons reveal chart captions and counting semantics.
+
+Condition, disease, category, combination, support/confidence/lift, length, and row-limit filters use native select menus. Options come from the selected snapshot, including recorded negative items only where the source supplies them. Removable chips show the active rule filters. The optional `item` rule-filter field matches an exact item in either side of the rule, and filtered CSV uses that same criterion. Legacy free-text API `search` remains supported for compatibility.
+
+Ranked bars display each full association's conditions and outcome directly, rather than ordinal rule names. The chart disease selector scopes both scatter plots and ranked comparisons. Full metric tables remain available through View exact chart metrics. Plot tooltips use the same human-readable labels, without changing the raw identifiers in data exports.
+
+Analysis settings defaults to preset menus. Custom values restores numeric inputs for precise experiments. This changes only the interface; selected-source defaults, backend validation, dataset workspaces, and original saved results are preserved.

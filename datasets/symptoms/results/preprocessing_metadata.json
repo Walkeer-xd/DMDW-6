@@ -1,0 +1,1249 @@
+{
+  "cleaning_log": {
+    "original_rows": 4920,
+    "cleaned_rows": 304,
+    "duplicate_rows_removed": 4616,
+    "missing_values_before": 46992,
+    "missing_values_after": 2843,
+    "invalid_values_fixed": 0,
+    "invalid_value_details": [],
+    "columns_removed": [],
+    "columns_excluded_from_mining": [],
+    "columns_transformed": {
+      "Symptom_1": "recorded symptom items",
+      "Symptom_2": "recorded symptom items",
+      "Symptom_3": "recorded symptom items",
+      "Symptom_4": "recorded symptom items",
+      "Symptom_5": "recorded symptom items",
+      "Symptom_6": "recorded symptom items",
+      "Symptom_7": "recorded symptom items",
+      "Symptom_8": "recorded symptom items",
+      "Symptom_9": "recorded symptom items",
+      "Symptom_10": "recorded symptom items",
+      "Symptom_11": "recorded symptom items",
+      "Symptom_12": "recorded symptom items",
+      "Symptom_13": "recorded symptom items",
+      "Symptom_14": "recorded symptom items",
+      "Symptom_15": "recorded symptom items",
+      "Symptom_16": "recorded symptom items",
+      "Symptom_17": "recorded symptom items"
+    },
+    "decisions": [
+      "Preserve the downloaded dataset.csv byte-for-byte in this dataset workspace.",
+      "Remove exact duplicate source rows by default; repeated benchmark profiles are not independent clinical evidence.",
+      "Trim disease labels and symptom names. Preserve disease spellings rather than inventing alias corrections.",
+      "Convert each nonempty symptom slot to a readable symptom=Yes item; each symptom appears at most once per transaction.",
+      "An empty symptom slot contributes no item. An unlisted symptom is unobserved, not a recorded No.",
+      "Do not create age, gender, blood pressure, cholesterol, outcome, or negative symptom observations: the source does not supply them.",
+      "Keep one Disease item in each transaction; disease rules have one Disease consequent and none in their antecedents.",
+      "Keep this source and its analysis separate from the original patient-profile dataset and from overlapping Kaggle copies."
+    ],
+    "duplicate_policy": "remove exact duplicates"
+  },
+  "feature_mapping": [
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "abdominal_pain",
+      "transformed_column": "abdominal_pain",
+      "new_item_label": "abdominal_pain=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "abnormal_menstruation",
+      "transformed_column": "abnormal_menstruation",
+      "new_item_label": "abnormal_menstruation=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "acidity",
+      "transformed_column": "acidity",
+      "new_item_label": "acidity=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "acute_liver_failure",
+      "transformed_column": "acute_liver_failure",
+      "new_item_label": "acute_liver_failure=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "altered_sensorium",
+      "transformed_column": "altered_sensorium",
+      "new_item_label": "altered_sensorium=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "anxiety",
+      "transformed_column": "anxiety",
+      "new_item_label": "anxiety=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "back_pain",
+      "transformed_column": "back_pain",
+      "new_item_label": "back_pain=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "belly_pain",
+      "transformed_column": "belly_pain",
+      "new_item_label": "belly_pain=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "blackheads",
+      "transformed_column": "blackheads",
+      "new_item_label": "blackheads=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "bladder_discomfort",
+      "transformed_column": "bladder_discomfort",
+      "new_item_label": "bladder_discomfort=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "blister",
+      "transformed_column": "blister",
+      "new_item_label": "blister=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "blood_in_sputum",
+      "transformed_column": "blood_in_sputum",
+      "new_item_label": "blood_in_sputum=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "bloody_stool",
+      "transformed_column": "bloody_stool",
+      "new_item_label": "bloody_stool=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "blurred_and_distorted_vision",
+      "transformed_column": "blurred_and_distorted_vision",
+      "new_item_label": "blurred_and_distorted_vision=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "breathlessness",
+      "transformed_column": "breathlessness",
+      "new_item_label": "breathlessness=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "brittle_nails",
+      "transformed_column": "brittle_nails",
+      "new_item_label": "brittle_nails=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "bruising",
+      "transformed_column": "bruising",
+      "new_item_label": "bruising=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "burning_micturition",
+      "transformed_column": "burning_micturition",
+      "new_item_label": "burning_micturition=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "chest_pain",
+      "transformed_column": "chest_pain",
+      "new_item_label": "chest_pain=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "chills",
+      "transformed_column": "chills",
+      "new_item_label": "chills=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "cold_hands_and_feets",
+      "transformed_column": "cold_hands_and_feets",
+      "new_item_label": "cold_hands_and_feets=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "coma",
+      "transformed_column": "coma",
+      "new_item_label": "coma=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "congestion",
+      "transformed_column": "congestion",
+      "new_item_label": "congestion=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "constipation",
+      "transformed_column": "constipation",
+      "new_item_label": "constipation=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "continuous_feel_of_urine",
+      "transformed_column": "continuous_feel_of_urine",
+      "new_item_label": "continuous_feel_of_urine=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "continuous_sneezing",
+      "transformed_column": "continuous_sneezing",
+      "new_item_label": "continuous_sneezing=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "cough",
+      "transformed_column": "cough",
+      "new_item_label": "cough=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "cramps",
+      "transformed_column": "cramps",
+      "new_item_label": "cramps=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "dark_urine",
+      "transformed_column": "dark_urine",
+      "new_item_label": "dark_urine=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "dehydration",
+      "transformed_column": "dehydration",
+      "new_item_label": "dehydration=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "depression",
+      "transformed_column": "depression",
+      "new_item_label": "depression=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "diarrhoea",
+      "transformed_column": "diarrhoea",
+      "new_item_label": "diarrhoea=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "dischromic _patches",
+      "transformed_column": "dischromic_patches",
+      "new_item_label": "dischromic_patches=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "distention_of_abdomen",
+      "transformed_column": "distention_of_abdomen",
+      "new_item_label": "distention_of_abdomen=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "dizziness",
+      "transformed_column": "dizziness",
+      "new_item_label": "dizziness=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "drying_and_tingling_lips",
+      "transformed_column": "drying_and_tingling_lips",
+      "new_item_label": "drying_and_tingling_lips=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "enlarged_thyroid",
+      "transformed_column": "enlarged_thyroid",
+      "new_item_label": "enlarged_thyroid=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "excessive_hunger",
+      "transformed_column": "excessive_hunger",
+      "new_item_label": "excessive_hunger=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "extra_marital_contacts",
+      "transformed_column": "extra_marital_contacts",
+      "new_item_label": "extra_marital_contacts=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "family_history",
+      "transformed_column": "family_history",
+      "new_item_label": "family_history=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "fast_heart_rate",
+      "transformed_column": "fast_heart_rate",
+      "new_item_label": "fast_heart_rate=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "fatigue",
+      "transformed_column": "fatigue",
+      "new_item_label": "fatigue=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "fluid_overload",
+      "transformed_column": "fluid_overload",
+      "new_item_label": "fluid_overload=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "foul_smell_of urine",
+      "transformed_column": "foul_smell_of_urine",
+      "new_item_label": "foul_smell_of_urine=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "headache",
+      "transformed_column": "headache",
+      "new_item_label": "headache=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "high_fever",
+      "transformed_column": "high_fever",
+      "new_item_label": "high_fever=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "hip_joint_pain",
+      "transformed_column": "hip_joint_pain",
+      "new_item_label": "hip_joint_pain=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "history_of_alcohol_consumption",
+      "transformed_column": "history_of_alcohol_consumption",
+      "new_item_label": "history_of_alcohol_consumption=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "increased_appetite",
+      "transformed_column": "increased_appetite",
+      "new_item_label": "increased_appetite=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "indigestion",
+      "transformed_column": "indigestion",
+      "new_item_label": "indigestion=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "inflammatory_nails",
+      "transformed_column": "inflammatory_nails",
+      "new_item_label": "inflammatory_nails=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "internal_itching",
+      "transformed_column": "internal_itching",
+      "new_item_label": "internal_itching=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "irregular_sugar_level",
+      "transformed_column": "irregular_sugar_level",
+      "new_item_label": "irregular_sugar_level=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "irritability",
+      "transformed_column": "irritability",
+      "new_item_label": "irritability=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "irritation_in_anus",
+      "transformed_column": "irritation_in_anus",
+      "new_item_label": "irritation_in_anus=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "itching",
+      "transformed_column": "itching",
+      "new_item_label": "itching=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "joint_pain",
+      "transformed_column": "joint_pain",
+      "new_item_label": "joint_pain=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "knee_pain",
+      "transformed_column": "knee_pain",
+      "new_item_label": "knee_pain=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "lack_of_concentration",
+      "transformed_column": "lack_of_concentration",
+      "new_item_label": "lack_of_concentration=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "lethargy",
+      "transformed_column": "lethargy",
+      "new_item_label": "lethargy=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "loss_of_appetite",
+      "transformed_column": "loss_of_appetite",
+      "new_item_label": "loss_of_appetite=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "loss_of_balance",
+      "transformed_column": "loss_of_balance",
+      "new_item_label": "loss_of_balance=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "loss_of_smell",
+      "transformed_column": "loss_of_smell",
+      "new_item_label": "loss_of_smell=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "malaise",
+      "transformed_column": "malaise",
+      "new_item_label": "malaise=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "mild_fever",
+      "transformed_column": "mild_fever",
+      "new_item_label": "mild_fever=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "mood_swings",
+      "transformed_column": "mood_swings",
+      "new_item_label": "mood_swings=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "movement_stiffness",
+      "transformed_column": "movement_stiffness",
+      "new_item_label": "movement_stiffness=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "mucoid_sputum",
+      "transformed_column": "mucoid_sputum",
+      "new_item_label": "mucoid_sputum=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "muscle_pain",
+      "transformed_column": "muscle_pain",
+      "new_item_label": "muscle_pain=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "muscle_wasting",
+      "transformed_column": "muscle_wasting",
+      "new_item_label": "muscle_wasting=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "muscle_weakness",
+      "transformed_column": "muscle_weakness",
+      "new_item_label": "muscle_weakness=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "nausea",
+      "transformed_column": "nausea",
+      "new_item_label": "nausea=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "neck_pain",
+      "transformed_column": "neck_pain",
+      "new_item_label": "neck_pain=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "nodal_skin_eruptions",
+      "transformed_column": "nodal_skin_eruptions",
+      "new_item_label": "nodal_skin_eruptions=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "obesity",
+      "transformed_column": "obesity",
+      "new_item_label": "obesity=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "pain_behind_the_eyes",
+      "transformed_column": "pain_behind_the_eyes",
+      "new_item_label": "pain_behind_the_eyes=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "pain_during_bowel_movements",
+      "transformed_column": "pain_during_bowel_movements",
+      "new_item_label": "pain_during_bowel_movements=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "pain_in_anal_region",
+      "transformed_column": "pain_in_anal_region",
+      "new_item_label": "pain_in_anal_region=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "painful_walking",
+      "transformed_column": "painful_walking",
+      "new_item_label": "painful_walking=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "palpitations",
+      "transformed_column": "palpitations",
+      "new_item_label": "palpitations=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "passage_of_gases",
+      "transformed_column": "passage_of_gases",
+      "new_item_label": "passage_of_gases=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "patches_in_throat",
+      "transformed_column": "patches_in_throat",
+      "new_item_label": "patches_in_throat=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "phlegm",
+      "transformed_column": "phlegm",
+      "new_item_label": "phlegm=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "polyuria",
+      "transformed_column": "polyuria",
+      "new_item_label": "polyuria=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "prominent_veins_on_calf",
+      "transformed_column": "prominent_veins_on_calf",
+      "new_item_label": "prominent_veins_on_calf=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "puffy_face_and_eyes",
+      "transformed_column": "puffy_face_and_eyes",
+      "new_item_label": "puffy_face_and_eyes=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "pus_filled_pimples",
+      "transformed_column": "pus_filled_pimples",
+      "new_item_label": "pus_filled_pimples=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "receiving_blood_transfusion",
+      "transformed_column": "receiving_blood_transfusion",
+      "new_item_label": "receiving_blood_transfusion=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "receiving_unsterile_injections",
+      "transformed_column": "receiving_unsterile_injections",
+      "new_item_label": "receiving_unsterile_injections=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "red_sore_around_nose",
+      "transformed_column": "red_sore_around_nose",
+      "new_item_label": "red_sore_around_nose=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "red_spots_over_body",
+      "transformed_column": "red_spots_over_body",
+      "new_item_label": "red_spots_over_body=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "redness_of_eyes",
+      "transformed_column": "redness_of_eyes",
+      "new_item_label": "redness_of_eyes=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "restlessness",
+      "transformed_column": "restlessness",
+      "new_item_label": "restlessness=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "runny_nose",
+      "transformed_column": "runny_nose",
+      "new_item_label": "runny_nose=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "rusty_sputum",
+      "transformed_column": "rusty_sputum",
+      "new_item_label": "rusty_sputum=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "scurring",
+      "transformed_column": "scurring",
+      "new_item_label": "scurring=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "shivering",
+      "transformed_column": "shivering",
+      "new_item_label": "shivering=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "silver_like_dusting",
+      "transformed_column": "silver_like_dusting",
+      "new_item_label": "silver_like_dusting=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "sinus_pressure",
+      "transformed_column": "sinus_pressure",
+      "new_item_label": "sinus_pressure=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "skin_peeling",
+      "transformed_column": "skin_peeling",
+      "new_item_label": "skin_peeling=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "skin_rash",
+      "transformed_column": "skin_rash",
+      "new_item_label": "skin_rash=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "slurred_speech",
+      "transformed_column": "slurred_speech",
+      "new_item_label": "slurred_speech=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "small_dents_in_nails",
+      "transformed_column": "small_dents_in_nails",
+      "new_item_label": "small_dents_in_nails=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "spinning_movements",
+      "transformed_column": "spinning_movements",
+      "new_item_label": "spinning_movements=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "spotting_ urination",
+      "transformed_column": "spotting_urination",
+      "new_item_label": "spotting_urination=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "stiff_neck",
+      "transformed_column": "stiff_neck",
+      "new_item_label": "stiff_neck=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "stomach_bleeding",
+      "transformed_column": "stomach_bleeding",
+      "new_item_label": "stomach_bleeding=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "stomach_pain",
+      "transformed_column": "stomach_pain",
+      "new_item_label": "stomach_pain=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "sunken_eyes",
+      "transformed_column": "sunken_eyes",
+      "new_item_label": "sunken_eyes=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "sweating",
+      "transformed_column": "sweating",
+      "new_item_label": "sweating=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "swelled_lymph_nodes",
+      "transformed_column": "swelled_lymph_nodes",
+      "new_item_label": "swelled_lymph_nodes=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "swelling_joints",
+      "transformed_column": "swelling_joints",
+      "new_item_label": "swelling_joints=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "swelling_of_stomach",
+      "transformed_column": "swelling_of_stomach",
+      "new_item_label": "swelling_of_stomach=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "swollen_blood_vessels",
+      "transformed_column": "swollen_blood_vessels",
+      "new_item_label": "swollen_blood_vessels=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "swollen_extremeties",
+      "transformed_column": "swollen_extremeties",
+      "new_item_label": "swollen_extremeties=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "swollen_legs",
+      "transformed_column": "swollen_legs",
+      "new_item_label": "swollen_legs=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "throat_irritation",
+      "transformed_column": "throat_irritation",
+      "new_item_label": "throat_irritation=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "toxic_look_(typhos)",
+      "transformed_column": "toxic_look_typhos",
+      "new_item_label": "toxic_look_typhos=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "ulcers_on_tongue",
+      "transformed_column": "ulcers_on_tongue",
+      "new_item_label": "ulcers_on_tongue=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "unsteadiness",
+      "transformed_column": "unsteadiness",
+      "new_item_label": "unsteadiness=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "visual_disturbances",
+      "transformed_column": "visual_disturbances",
+      "new_item_label": "visual_disturbances=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "vomiting",
+      "transformed_column": "vomiting",
+      "new_item_label": "vomiting=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "watering_from_eyes",
+      "transformed_column": "watering_from_eyes",
+      "new_item_label": "watering_from_eyes=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "weakness_in_limbs",
+      "transformed_column": "weakness_in_limbs",
+      "new_item_label": "weakness_in_limbs=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "weakness_of_one_body_side",
+      "transformed_column": "weakness_of_one_body_side",
+      "new_item_label": "weakness_of_one_body_side=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "weight_gain",
+      "transformed_column": "weight_gain",
+      "new_item_label": "weight_gain=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "weight_loss",
+      "transformed_column": "weight_loss",
+      "new_item_label": "weight_loss=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "yellow_crust_ooze",
+      "transformed_column": "yellow_crust_ooze",
+      "new_item_label": "yellow_crust_ooze=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "yellow_urine",
+      "transformed_column": "yellow_urine",
+      "new_item_label": "yellow_urine=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "yellowing_of_eyes",
+      "transformed_column": "yellowing_of_eyes",
+      "new_item_label": "yellowing_of_eyes=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Symptom_1…Symptom_17",
+      "original_value": "yellowish_skin",
+      "transformed_column": "yellowish_skin",
+      "new_item_label": "yellowish_skin=Yes",
+      "reason": "Recorded presence; unlisted symptoms contribute no item"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "(vertigo) Paroymsal  Positional Vertigo",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=(vertigo) Paroymsal  Positional Vertigo",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "AIDS",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=AIDS",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Acne",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Acne",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Alcoholic hepatitis",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Alcoholic hepatitis",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Allergy",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Allergy",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Arthritis",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Arthritis",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Bronchial Asthma",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Bronchial Asthma",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Cervical spondylosis",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Cervical spondylosis",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Chicken pox",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Chicken pox",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Chronic cholestasis",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Chronic cholestasis",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Common Cold",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Common Cold",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Dengue",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Dengue",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Diabetes",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Diabetes",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Dimorphic hemmorhoids(piles)",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Dimorphic hemmorhoids(piles)",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Drug Reaction",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Drug Reaction",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Fungal infection",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Fungal infection",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "GERD",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=GERD",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Gastroenteritis",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Gastroenteritis",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Heart attack",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Heart attack",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Hepatitis B",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Hepatitis B",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Hepatitis C",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Hepatitis C",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Hepatitis D",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Hepatitis D",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Hepatitis E",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Hepatitis E",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Hypertension",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Hypertension",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Hyperthyroidism",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Hyperthyroidism",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Hypoglycemia",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Hypoglycemia",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Hypothyroidism",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Hypothyroidism",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Impetigo",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Impetigo",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Jaundice",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Jaundice",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Malaria",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Malaria",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Migraine",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Migraine",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Osteoarthristis",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Osteoarthristis",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Paralysis (brain hemorrhage)",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Paralysis (brain hemorrhage)",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Peptic ulcer diseae",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Peptic ulcer diseae",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Pneumonia",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Pneumonia",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Psoriasis",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Psoriasis",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Tuberculosis",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Tuberculosis",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Typhoid",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Typhoid",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Urinary tract infection",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Urinary tract infection",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "Varicose veins",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=Varicose veins",
+      "reason": "Trimmed source disease label"
+    },
+    {
+      "original_column": "Disease",
+      "original_value": "hepatitis A",
+      "transformed_column": "Disease",
+      "new_item_label": "Disease=hepatitis A",
+      "reason": "Trimmed source disease label"
+    }
+  ]
+}
