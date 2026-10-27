@@ -20,6 +20,8 @@ from src.datasets import DATASETS, DEFAULT_DATASET, dataset_spec, dataset_root
 from src.symptom_pipeline import run_symptom_pipeline
 
 app = FastAPI(title='DMDW6 Apriori API', version='1.1.0')
+from backend.app.upload_demo import router as upload_demo_router
+app.include_router(upload_demo_router)
 # One writer also protects the shared report-rendering library. Readers keep their complete snapshot.
 lock = threading.Lock()
 state = None  # Backward-compatible default-dataset cache.

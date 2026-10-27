@@ -24,12 +24,14 @@ DECISIONS = [
 ]
 
 
-def prepare_symptoms(raw, remove_duplicates=True):
+def prepare_symptoms(raw, remove_duplicates=True, progress=None):
     slots = [f'Symptom_{i}' for i in range(1, 18)]
     if list(raw.columns) != ['Disease', *slots]:
         raise ValueError('Expected Disease and Symptom_1 through Symptom_17 in the symptom-list dataset.')
     quality = audit(raw)
     quality.update(filename='dataset.csv', source=dataset_spec('symptoms')['source'])
+    if progress:
+        progress('audit', f"Found {quality['duplicate_rows']} exact duplicate rows and {quality['missing_values']} empty slots. Empty slots do not mean No.")
     for column in quality['columns']:
         column['treatment'] = ('Trim disease label; keep source spelling' if column['name'] == 'Disease'
                                else 'Trim symptom name; an empty slot contributes no item, never No')
@@ -63,6 +65,8 @@ def prepare_symptoms(raw, remove_duplicates=True):
         lengths[len(symptoms)] += 1
         transactions.append(sorted([f'{name}=Yes' for name in symptoms] + [f"Disease={row['Disease']}"]))
 
+    if progress:
+        progress('clean', f'Retained {len(frame)} rows; removed {len(raw) - len(frame)} duplicates. Trimmed labels; ignored empty symptom slots.', {'preview': frame.head(5).to_dict('records')})
     encoder = TransactionEncoder()
     matrix = pd.DataFrame(encoder.fit_transform(transactions), columns=encoder.columns_)
     mapping = [{'original_column': 'Symptom_1…Symptom_17', 'original_value': value,
@@ -91,14 +95,18 @@ def prepare_symptoms(raw, remove_duplicates=True):
     return frame, quality, log, transactions, matrix, mapping, distributions
 
 
-def run_symptom_pipeline(config, root, raw_path):
+def run_symptom_pipeline(config, root, raw_path, progress=None):
     spec = dataset_spec('symptoms')
     if config.max_itemset_size > spec['max_itemset_size']:
         raise ValueError('The symptom dataset supports combinations up to 3 items to keep its larger symptom search practical.')
     root, raw_path = Path(root), Path(raw_path)
     raw = load_raw(raw_path)
-    frame, quality, log, transactions, matrix, mapping, distributions = prepare_symptoms(raw, config.remove_duplicates)
-    itemsets, rules, disease, counts = mine(matrix, config)
+    if progress:
+        progress('read', f'Read {len(raw):,} rows and {len(raw.columns)} columns.', {'preview': raw.head(5).to_dict('records')})
+    frame, quality, log, transactions, matrix, mapping, distributions = prepare_symptoms(raw, config.remove_duplicates, progress)
+    if progress:
+        progress('encode', f'Encoded {len(transactions)} transactions across {len(matrix.columns)} distinct items. Starting Apriori.', {'transactions': transactions[:5], 'matrix': matrix.iloc[:5, :12].astype(int).to_dict('records')})
+    itemsets, rules, disease, counts = mine(matrix, config, progress)
     summary = {
         'title': 'Association Rule Mining using Apriori on Recorded Disease Symptoms',
         'raw_records': len(raw), 'records': len(frame), 'attributes': len(raw.columns),

@@ -204,11 +204,13 @@ def is_disease_rule(rule):
 def rank_rules(rules):
     return sorted(rules, key=lambda r: (-r['lift'], -r['confidence'], -r['support'], r['antecedents'], r['consequents']))
 
-def mine(matrix, config):
+def mine(matrix, config, progress=None):
     frequent = apriori(matrix, min_support=config.min_support, use_colnames=True, max_len=config.max_itemset_size)
     itemsets = sorted([{'itemset': sorted(r.itemsets), 'support':float(r.support),
                         'item_count':int(round(r.support*len(matrix))), 'length':len(r.itemsets)}
                        for r in frequent.itertuples()], key=lambda r:(-r['support'],r['length'],r['itemset']))
+    if progress:
+        progress('itemsets', f'Found {len(itemsets):,} frequent itemsets. Generating rules and calculating support, confidence and lift.', {'preview': itemsets[:5]})
     rules = []
     if len(frequent) and frequent.itemsets.map(len).max() >= 2:
         table = association_rules(frequent, num_itemsets=len(matrix), metric='confidence', min_threshold=config.min_confidence)
@@ -245,15 +247,23 @@ def write_csv(path, records, fields):
     data = [{k:json.dumps(v,ensure_ascii=False) if isinstance(v,list) else v for k,v in r.items()} for r in records]
     pd.DataFrame(data, columns=list(data[0]) if data else fields).to_csv(path,index=False)
 
-def run_pipeline(config=None, root=ROOT, raw_path=RAW):
+def run_pipeline(config=None, root=ROOT, raw_path=RAW, progress=None):
     config = config or AnalysisConfig()
     for p in ['results','data/processed','data/intermediate','reports']:
         (root/p).mkdir(parents=True,exist_ok=True)
     raw = load_raw(raw_path)
+    if progress:
+        progress('read', f'Read {len(raw):,} rows and {len(raw.columns)} columns.', {'preview': raw.head(5).to_dict('records')})
     quality = audit(raw)
+    if progress:
+        progress('audit', f"Found {quality['duplicate_rows']} exact duplicate rows and {quality['missing_values']} empty or unknown cells.")
     cleaned, log = clean(raw, config.remove_duplicates)
+    if progress:
+        progress('clean', f"Retained {len(cleaned)} rows; removed {log['duplicate_rows_removed']} duplicates and handled {log['invalid_values_fixed']} invalid values.", {'preview': json.loads(cleaned.head(5).to_json(orient='records'))})
     transactions, matrix, mapping = encode(cleaned,raw)
-    itemsets, rules, disease, counts = mine(matrix,config)
+    if progress:
+        progress('encode', f'Encoded {len(transactions)} transactions across {len(matrix.columns)} distinct items. Starting Apriori.', {'transactions': transactions[:5], 'matrix': matrix.iloc[:5, :12].astype(int).to_dict('records')})
+    itemsets, rules, disease, counts = mine(matrix,config,progress)
     distributions = {c:cleaned[c].fillna('Unknown').astype(str).value_counts().to_dict() for c in cleaned if c != 'Age'}
     summary = {'title':'Association Rule Mining using Apriori on Disease Symptoms and Patient Profiles',
                'raw_records':len(raw),'records':len(cleaned),'attributes':len(raw.columns),

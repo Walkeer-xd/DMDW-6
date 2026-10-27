@@ -35,3 +35,22 @@ The primary pages show charts and short labels. Open the information icons or ex
 
 
 Long tables use 10-row pages. **Previous** and **Next** browse the selected results; the **Rows to show** menu sets the selection limit, and Filtered CSV exports that entire selection. The chart ranking can be switched between **By lift** and **By confidence** without repeating the same associations in two separate lists.
+
+## Live demonstration with a new upload
+
+1. Open **Live upload demo** from the sidebar or page-heading button.
+2. Download **Patient profiles** or **Symptom list**. Both are explicitly synthetic
+   samples: 63 rows, three fictional disease groups, three exact duplicates.
+3. Select the downloaded CSV and run with the default thresholds.
+4. Expand each completed stage: validate → read → audit → clean → encode →
+   frequent itemsets → association rules. Show raw and cleaned rows, readable
+   transactions and the binary matrix before explaining support, confidence and lift.
+5. Explain the worked rule and compare the disease distribution, itemsets and rule
+   tables. Change a threshold or duplicate handling and run again.
+6. Download the run's CSV/JSON outputs, then click **Clear demo** to demonstrate
+   that temporary upload results disappear. Refreshing also clears them.
+
+The upload accepts UTF-8 CSV in either supplied format, up to 1 MB and 1,000 rows.
+The server deletes temporary files after each successful or failed run. Existing
+datasets and saved reports remain unchanged. The demo uses the real Apriori pipeline;
+it discovers in-sample associations rather than making disease predictions.
