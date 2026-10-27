@@ -1,0 +1,2 @@
+/* Export typography; keep labels legible in presentations and README previews. */
+.node rect { filter: drop-shadow(0 2px 2px #17324d0a); }

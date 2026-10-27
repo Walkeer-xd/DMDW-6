@@ -6,13 +6,34 @@
 
 A visual academic workspace for Apriori association mining across two independently selectable datasets.
 
-[Start here](#start-here) · [Choose a dataset](#choose-a-dataset) · [Five-minute demo](#your-five-minute-walkthrough) · [Presentation guide](docs/PRESENTATION_GUIDE.md) · [Technical guide](docs/TECHNICAL_GUIDE.md)
+[Start here](#start-here) · [Project architecture](#project-architecture) · [Choose a dataset](#choose-a-dataset) · [Five-minute demo](#your-five-minute-walkthrough) · [Presentation guide](docs/PRESENTATION_GUIDE.md) · [Technical guide](docs/TECHNICAL_GUIDE.md)
 
 </div>
 
 ![Association Lab welcome screen](reports/screenshots/presentation-welcome.jpg)
 
 Association Lab discovers recorded features that appear together. Explore charts, select conditions, inspect associations, and download reports without writing filter syntax. Results describe the supplied data; they do not diagnose patients or establish medical causes.
+
+## Project architecture
+
+The Mermaid diagram follows the project from source records through preparation and Apriori mining to the API, interactive dashboard, and downloadable findings. The two saved datasets keep independent file workspaces. Live CSV uploads use temporary analysis storage and stream results to the interface; local analysis settings rerun the selected saved dataset through the preparation and mining stages.
+
+[![Association Lab architecture: data sources, preparation, Apriori mining, results, and interactive workspace](docs/architecture.png)](docs/architecture.png)
+
+**[Download the high-resolution PNG](docs/architecture.png)** · [Editable Mermaid source](docs/architecture.mmd)
+
+<details>
+<summary>Regenerate the diagram</summary>
+
+From the repository root, with Node.js installed:
+
+```bash
+npx --yes --package @mermaid-js/mermaid-cli@11.12.0 mmdc -i docs/architecture.mmd -o docs/architecture.png -C docs/architecture.css -b white -w 2000 -s 2
+```
+
+The Mermaid source defines the layout, colors, and icons; [the export stylesheet](docs/architecture.css) adds subtle shadows. The PNG is included in the repository, so viewing this README does not require a renderer.
+
+</details>
 
 ## Start here
 

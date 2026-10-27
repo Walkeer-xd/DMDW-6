@@ -1,0 +1,88 @@
+---
+title: Association Lab — project architecture
+config:
+  fontFamily: 'DejaVu Sans'
+  theme: base
+  look: classic
+  themeVariables:
+    fontFamily: 'DejaVu Sans'
+    fontSize: 17px
+    primaryTextColor: '#17324d'
+    lineColor: '#8297ad'
+    clusterBkg: '#f8fafc'
+    clusterBorder: '#d8e2ed'
+    edgeLabelBackground: '#ffffff'
+  flowchart:
+    htmlLabels: true
+    curve: basis
+    nodeSpacing: 35
+    rankSpacing: 48
+    padding: 22
+---
+flowchart TB
+    subgraph LAB["ASSOCIATION LAB  ·  FROM RECORDED DATA TO EXPLAINABLE PATTERNS"]
+        direction TB
+
+        subgraph SOURCES["01  /  DATA SOURCES"]
+            direction LR
+            P["📋 <b>Patient profiles</b><br/>Symptoms + demographics<br/>Original Kaggle CSV"]
+            S["🩺 <b>Symptoms & diseases</b><br/>Recorded symptom lists<br/>Extended Kaggle CSV"]
+            U["📤 <b>Live upload demo</b><br/>Supported CSV formats<br/>Temporary analysis only"]
+            P ~~~ S ~~~ U
+        end
+
+        subgraph PREP["02  /  DATA PREPARATION  ·  PYTHON + PANDAS"]
+            direction LR
+            A["🔎 <b>Audit & clean</b><br/>Missing values · duplicates<br/>Source-specific normalization"]
+            E["🧩 <b>Build transactions</b><br/>One retained row per transaction<br/>Boolean item matrix"]
+            A --> E
+        end
+
+        subgraph MINING["03  /  ASSOCIATION MINING  ·  MLXTEND"]
+            direction LR
+            M["⚙️ <b>Apriori</b><br/>Find frequent itemsets<br/>Minimum support + size limit"]
+            R["🔗 <b>Generate & rank rules</b><br/>Support · confidence · lift<br/>General + disease associations"]
+            M --> R
+        end
+
+        subgraph RESULTS["04  /  RESULTS & DELIVERY"]
+            direction LR
+            F["🗂️ <b>Independent file workspaces</b><br/>Original: root data / results / reports<br/>Extended: datasets/symptoms/"]
+            B["⚡ <b>FastAPI service</b><br/>Dataset-scoped reads & filters<br/>Separate in-memory snapshots"]
+            D["📑 <b>Reports & exports</b><br/>CSV · JSON · Markdown · PDF<br/>Matplotlib + ReportLab"]
+            F -->|saved analysis| B
+            F -->|saved artifacts| D
+        end
+
+        subgraph EXPERIENCE["05  /  INTERACTIVE WORKSPACE  ·  REACT + VITE + RECHARTS"]
+            direction LR
+            UI["🖥️ <b>Explore the evidence</b><br/>Dataset selection · charts · filters<br/>Tutorial · disease associations"]
+            CFG["🎛️ <b>Local analysis settings</b><br/>Change mining thresholds<br/>Rerun the selected saved dataset"]
+            DL["📥 <b>Download findings</b><br/>Selected dataset reports<br/>Filtered rule exports"]
+            UI --- CFG
+            UI --- DL
+        end
+
+        SOURCES -->|selected source · uploads stay temporary| PREP
+        PREP -->|encoded observations| MINING
+        MINING -->|publish saved dataset analysis| RESULTS
+        MINING -.->|temporary upload results + progress stream| EXPERIENCE
+        RESULTS -->|HTTP / JSON · report downloads| EXPERIENCE
+    end
+
+    classDef source fill:#eaf2ff,stroke:#6c9ce3,color:#173b6b,stroke-width:1.5px,rx:12,ry:12;
+    classDef prepare fill:#e5f6f1,stroke:#55ad95,color:#145342,stroke-width:1.5px,rx:12,ry:12;
+    classDef mine fill:#f0eaff,stroke:#a28bd4,color:#4b3279,stroke-width:1.5px,rx:12,ry:12;
+    classDef service fill:#fff3df,stroke:#d5a451,color:#6e4916,stroke-width:1.5px,rx:12,ry:12;
+    classDef experience fill:#e4f4fc,stroke:#66a9c9,color:#174d67,stroke-width:1.5px,rx:12,ry:12;
+    class P,S,U source;
+    class A,E prepare;
+    class M,R mine;
+    class F,B,D service;
+    class UI,CFG,DL experience;
+    style LAB fill:#ffffff,stroke:#d8e2ed,stroke-width:1px,color:#17324d
+    style SOURCES fill:#f6f9ff,stroke:#d7e5f8,color:#355b85
+    style PREP fill:#f3fbf8,stroke:#d2eae1,color:#34735f
+    style MINING fill:#f8f5ff,stroke:#e3daf5,color:#6a5394
+    style RESULTS fill:#fffaf1,stroke:#f0e1c5,color:#866329
+    style EXPERIENCE fill:#f3faff,stroke:#d2e8f4,color:#3b6f87
